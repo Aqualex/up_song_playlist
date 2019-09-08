@@ -11,6 +11,10 @@ UPPLAY_URL -> the url to your youtube video or playlist
 UPPLAY_LOC -> the location where the songs will be downloaded
 UPPLAY_TO -> the location where you want the songs to be copied 
 ```
+3. From terminal run: 
+```
+bash start.sh <location_to_download>
+```
 ## Note 
 At the time being the utility does not support checking for duplicates and cleaning the workspace 
 Other thigs will be added in the future 
