@@ -6,13 +6,6 @@
 ########################################################################################################################
 
 ########################################################################################################################
-##     SETTING ENVIRONMENT VARIABLES                                                                                  ##
-########################################################################################################################
-URL="https://www.youtube.com/watch?v=36tggrpRoTI&list=PLgAMMtt4kf4TXH0r0xINENxAAqFCXGN2t"
-loc=/media/alex/cf35aee0-faeb-40bb-adac-88595e8f71fe/alex_hdd/2019/PersonalProg/bash/update_song_playlist/
-to=/run/user/1000/gvfs/mtp:host=%5Busb%3A001%2C010%5D/Card/Music/
-
-########################################################################################################################
 ##     FUNCTIONS DEFINITIONS                                                                                          ##
 ######################################################################################################################## 
 gettimestamp(){
@@ -40,7 +33,7 @@ convertsnames(){
 settingdefaults(){
   #set defaul values
   echo "[INFO]|$(gettimestamp)|Checking if URL has been provided..."
-  if [ -z "$URL" ];then 
+  if [ -z "$UPPLAY_URL" ];then 
     echo -n "[ERROR]|$(gettimestamp)|URL has not been provided! Program will now exit..."
     exit 1
   fi
@@ -64,13 +57,13 @@ downdep(){
 
 updateplaylist(){
   echo "[INFO]|$(gettimestamp)|Downloading playlist..."
-  youtube-dl --extract-audio --audio-format mp3 --output $loc --ignore-errors --continue --download-archive songs.txt $1	
+  youtube-dl --extract-audio --audio-format mp3 --output $UPPLAY_LOC --ignore-errors --continue --download-archive songs.txt $1	
 }
 
 syncdevice(){
   #move files
   echo "[INFO]|$(gettimestamp)|Syncing device..."
-  cp "$loc*" "$to"
+  cp "$UPPLAY_LOC*" "$UPPLAY_TO"
 }
 
 ########################################################################################################################
@@ -79,6 +72,6 @@ syncdevice(){
 #Executing functions 
 settingdefaults; 
 downdep;
-updateplaylist "$URL"; 
+updateplaylist "$UPPLAY_LOC"; 
 convertsnames;
 syncdevice;
